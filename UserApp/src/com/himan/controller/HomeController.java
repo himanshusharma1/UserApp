@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.himan.domain.User;
@@ -24,7 +25,11 @@ public class HomeController {
 	@RequestMapping("/login")
 	public ModelAndView login(@RequestParam("userName") String userName, @RequestParam("password") String password) {
 		if(userName.equals("abc") && password.equals("123")) {
-			return new ModelAndView("redirect:/register.html");
+			//return new ModelAndView("redirect:/register.html");
+			Map<String, Object> model = new HashMap<String, Object>();
+			model.put("username", "ABC");
+			return new ModelAndView("home", "model", model);
+			
 		} else {
 			return new ModelAndView("login", "message", "failed to login");
 		}
@@ -54,11 +59,12 @@ public class HomeController {
 	}
 
 	@RequestMapping("/saveUser")
-	public ModelAndView saveUserData(@ModelAttribute("user") User user,
+	 @ResponseBody
+	public String saveUserData(@ModelAttribute("user") User user,
 			BindingResult result) {
 		userService.addUser(user);
 		System.out.println("Save User Data");
-		return new ModelAndView("redirect:/userList.html");
+		return "SUCCESS";
 	}
 
 	@RequestMapping("/userList")
