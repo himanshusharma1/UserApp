@@ -11,7 +11,7 @@
 <body>
 <center>
 <br><br><br><br><br><br>
-<div style="color: teal;font-size: 30px">| Registration Form |</div>
+<div style="color: teal;font-size: 30px">|| Registration Form ||</div>
 <br><br>
 <c:url var="userRegistration" value="saveUser.html"/>
 <form:form id="registerForm" modelAttribute="user" method="post" action="${userRegistration}">
