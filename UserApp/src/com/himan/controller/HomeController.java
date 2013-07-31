@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.himan.domain.User;
@@ -20,6 +21,20 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 
+	@RequestMapping("/login")
+	public ModelAndView login(@RequestParam("userName") String userName, @RequestParam("password") String password) {
+		if(userName.equals("abc") && password.equals("123")) {
+			return new ModelAndView("redirect:/register.html");
+		} else {
+			return new ModelAndView("login", "message", "failed to login");
+		}
+		
+	}
+	@RequestMapping("/loginPage")
+	public ModelAndView login() {
+		return new ModelAndView("login", "message", "");
+	}
+	
 	@RequestMapping("/register")
 	public ModelAndView getRegisterForm(@ModelAttribute("user") User user,
 			BindingResult result) {

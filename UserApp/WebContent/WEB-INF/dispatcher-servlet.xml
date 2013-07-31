@@ -23,6 +23,12 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+      <property name="cache" value="true"/>
+      <property name="prefix" value=""/>
+      <property name="suffix" value=".ftl"/>
+    </bean>
+	
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${database.driver}" />
